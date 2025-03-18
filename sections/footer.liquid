@@ -1,0 +1,129 @@
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Logo -->
+    {% if section.settings.show_logo and section.settings.logo != blank %}
+      <div class="footer-logo">
+        <img src="{{ section.settings.logo | img_url: 'medium' }}" alt="Logo">
+      </div>
+    {% endif %}
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      {% for block in section.blocks %}
+        {% if block.type == "link" %}
+          <a href="{{ block.settings.link_url }}">{{ block.settings.link_text }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Social Media Links -->
+    <div class="footer-social">
+      {% if section.settings.facebook_url != blank %}
+        <a href="{{ section.settings.facebook_url }}" target="_blank">Facebook</a>
+      {% endif %}
+      {% if section.settings.instagram_url != blank %}
+        <a href="{{ section.settings.instagram_url }}" target="_blank">Instagram</a>
+      {% endif %}
+      {% if section.settings.twitter_url != blank %}
+        <a href="{{ section.settings.twitter_url }}" target="_blank">Twitter</a>
+      {% endif %}
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-copyright">
+      <p>{{ section.settings.copyright_text }}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #222;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  .footer-logo img {
+    max-width: 150px;
+  }
+  .footer-links a, .footer-social a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  .footer-links a:hover, .footer-social a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show Logo",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "© 2024 Your Store Name. All Rights Reserved."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Quick Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Contact Us"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "link"
+        },
+        {
+          "type": "link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

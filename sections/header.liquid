@@ -1,0 +1,174 @@
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+     {
+      "type": "text",
+      "id": "title",
+      "label": "Logo Image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Bar",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
+
+<header class="header">
+  <div class="container">
+    <!-- Mobile Menu Button -->
+    <button onclick="toggleMenu()" class="menu-button">☰</button>
+
+    <!-- Store Logo -->
+  <a href="{{ shop.url }}" class="logo">
+  {% if section.settings.logo != blank %}
+    <img src="{{ section.settings.logo | img_url: 'medium' }}" alt="{{ shop.name }}">
+  {% else %}
+    <h1>{{ section.settings.title }}</h1>
+  {% endif %}
+</a>
+
+    
+
+    <!-- Desktop Navigation -->
+    <nav class="nav">
+      {% for link in linklists[section.settings.menu].links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <!-- Search Bar --> 
+    {% if section.settings.show_search %}
+      <div class="search-bar">
+        <input type="text" placeholder="🔍 Search...">
+      </div>
+    {% endif %}
+
+    <!-- Cart & Account Icons -->
+    <div class="icons">
+      <a href="{{ routes.account_url }}" title="Account">👤</a>
+      <a href="{{ routes.cart_url }}" class="cart" title="Cart">
+        🛒 <span id="cart-count">{{ cart.item_count }}</span>
+      </a>
+      <a href="/wishlist" title="Wishlist">❤️</a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu">
+    {% for link in linklists[section.settings.menu].links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {% endfor %}
+  </div>
+</header>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .header {
+    background: white;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .logo img {
+    height: 50px;
+  }
+  .nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+  }
+  .search-bar input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .icons a {
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  .cart span {
+    background: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+  }
+  .menu-button {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .mobile-menu {
+    display: none;
+    background: white;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    left: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .mobile-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+  }
+  .homepage {
+    text-align: center;
+    padding-top: 80px;
+  }
+  @media (max-width: 768px) {
+    .nav { display: none; }
+    .menu-button { display: block; }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .mobile-menu.display-block {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("mobile-menu").classList.toggle("display-block");
+  }
+</script>

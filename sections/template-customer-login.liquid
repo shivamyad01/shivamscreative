@@ -1,0 +1,24 @@
+<section class="customer-login">
+  <h2>Customer Login</h2>
+
+  {% if customer %}
+    <p>Welcome, {{ customer.first_name }}!</p>
+    <a href="{{ routes.account_url }}">Go to Account</a>
+    <a href="{{ routes.account_logout_url }}" class="btn-logout">Logout</a>
+  {% else %}
+    <form method="post" action="{{ routes.account_login_url }}">
+      <label for="email">Email</label>
+      <input type="email" name="customer[email]" id="email" required>
+      
+      <label for="password">Password</label>
+      <input type="password" name="customer[password]" id="password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p>
+      <a href="{{ routes.account_register_url }}">Create an account</a> |
+      <a href="{{ routes.account_recover_url }}">Forgot password?</a>
+    </p>
+  {% endif %}
+</section>

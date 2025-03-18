@@ -1,12 +1,95 @@
-body {
-    background-color: rgb(251, 251, 232);
+/* Announcement Bar Styles */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
 }
 
-.homepage {
-    text-align: center;
-    padding-top: 10em;
+.top-bar__announcement a, .top-bar__announcement p {
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
 }
 
-.logo {
-    width: 25%;
+.top-bar__prev-btn, .top-bar__next-btn, .top-bar--destroy {
+  cursor: pointer;
+}
+
+/* Header Styles */
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Navigation Menu */
+.main-nav__menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+}
+
+.main-nav__menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.has-subnav {
+  position: relative;
+}
+
+.main-nav__sub-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 10px;
+  min-width: 200px;
+}
+
+.has-subnav:hover .main-nav__sub-nav {
+  display: block;
+}
+
+/* Utility Menu */
+.main-nav__utility-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.main-nav__utility-menu a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Mobile Footer */
+.mobile-footer {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .main-nav__menu {
+    display: none;
+  }
+  .mobile-footer {
+    display: block;
+  }
 }
