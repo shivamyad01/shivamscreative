@@ -1,8 +1,8 @@
 {
-  "name": "Login",
+  "name": "Register",
   "sections": {
     "template": {
-      "type": "login-form"
+      "type": "register-form"
     }
   },
   "order": ["template"]

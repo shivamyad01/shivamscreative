@@ -1,0 +1,16 @@
+<section class="auth-container">
+  <h2>Login to Your Account</h2>
+
+  {% form 'customer_login' %}
+    <label for="email">Email</label>
+    <input type="email" name="customer[email]" id="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" name="customer[password]" id="password" required>
+
+    <button type="submit">Login</button>
+  {% endform %}
+
+  <p><a href="{{ routes.account_register_url }}">Create an account</a></p>
+  <p><a href="{{ routes.password_recovery_url }}">Forgot your password?</a></p>
+</section>
